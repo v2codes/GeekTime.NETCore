@@ -29,3 +29,9 @@
 		简单的可以理解为：在每一次请求内得到的都是同一个对象，不同请求之间，得到的对象实例是不同的。
 	瞬时（暂时） Transient
 		每一次从容器里获取对象时，都会得到一个全新的对象。
+
+Controller 中使用注入时，有两种方式：
+	构造函数注入
+	Action 参数中 [FromServices]IMySingletonService singletonService1
+	当需要使用的对象是整个Controller中大部分函数中使用时，建议使用构造函数方式注入。
+	反之，则建议仅在需要使用的接口/函数中，使用 FromServices 标记获取对象。

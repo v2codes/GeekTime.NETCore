@@ -58,7 +58,7 @@ namespace IOC.Demo
             // 如果服务中已经被注册过任一实现，那么就不再注册
             //services.TryAddSingleton<IOrderService, OrderService>();
             //services.TryAddSingleton<IOrderService>(new OrderServiceEx());
-            // 仅当没有同一个具体类型的实现时，才注册该服务
+            // 当前容器中没有同一具体类型的实现时，才去执行注册该服务
             services.TryAddEnumerable(ServiceDescriptor.Singleton<IOrderService, OrderServiceEx>());
             #endregion
 
