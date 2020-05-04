@@ -22,7 +22,7 @@ namespace AutoFac.Demo.Services
         public MyNameService nameService { get; set; }
         public void ShowCode()
         {
-            Console.WriteLine($"MyService2.ShowCode:{this.GetHashCode()},NameService是否为空:{nameService == null}");
+            Console.WriteLine($"MyService2.ShowCode:{this.GetHashCode()}，NameService是否为空:{nameService == null}");
         }
     }
 
