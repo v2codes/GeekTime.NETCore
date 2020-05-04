@@ -3,7 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScopeDisposed.Demo", "ScopeDisposed.Demo\ScopeDisposed.Demo.csproj", "{6C3E8973-8E96-4279-BC69-D56181CFABA2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScopeDisposed.Demo", "ScopeDisposed.Demo\ScopeDisposed.Demo.csproj", "{6C3E8973-8E96-4279-BC69-D56181CFABA2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_readme", "_readme", "{03A4C23C-20A7-43B4-BD09-1EB9A368A992}"
+	ProjectSection(SolutionItems) = preProject
+		readme.txt = readme.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

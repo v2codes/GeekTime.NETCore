@@ -36,6 +36,9 @@ namespace ScopeDisposed.Demo
             //单例：根容器以及子容器内只能获得同一对象
             // 容器自身创建的对象，应用程序退出时会释放所有实现了 IDisposable 的对象
             //services.AddSingleton<IOrderService>(services => new DisposableOrderService());
+            //services.AddScoped<IOrderService>(services => new DisposableOrderService());
+            //services.AddTransient<IOrderService>(services => new DisposableOrderService());
+
             // 我们手动自己创建的对象，应用程序退出时不会被自动释放
             //var orderService = new DisposableOrderService();
             //services.AddSingleton<IOrderService>(orderService);
@@ -47,9 +50,10 @@ namespace ScopeDisposed.Demo
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            // 坑
+            // 这里有个坑需要注意
             // 从根容器获取瞬时服务对象，只有应用程序退出时才会释放，因为根容器会一直持有该对象
             var s = app.ApplicationServices.GetService<IOrderService>();
+            var s2 = app.ApplicationServices.GetService<IOrderService>();
 
             if (env.IsDevelopment())
             {

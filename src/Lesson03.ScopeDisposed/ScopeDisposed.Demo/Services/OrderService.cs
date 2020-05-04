@@ -5,7 +5,11 @@ using System.Threading.Tasks;
 
 namespace ScopeDisposed.Demo.Services
 {
-    public interface IOrderService { }
+    public interface IOrderService { 
+    
+    }
+
+
     public class DisposableOrderService : IOrderService, IDisposable
     {
         public void Dispose()
