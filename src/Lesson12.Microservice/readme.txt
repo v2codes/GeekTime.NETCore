@@ -1,0 +1,129 @@
+
+工程结构概览 -- 定义应用分层及依赖关系
+	分层
+		领域模型层(Domain)
+			定义不同的聚合(Aggregate),以及领域模型
+			定义领域事件
+		基础设施层
+			仓储层、EF的Domain的Context、以及其他共享代码的具体实现
+			领域模型与数据库之间的映射关系(EntityConfigurations目录下)
+			全局事务管理(DomainContextTransactionBehavior)
+		应用层
+			API层，承载Web Api或Web应用
+				Infrastructure:基础设施目录，存放身份认证、缓存之类的与基础设施交互的代码
+				Extensions:扩展层，服务注册(ServiceCollection)、中间件配置(ApplicationBuilder)的扩展
+				Controller:控制器层，主要定义Web API 前后端交互的接口
+				Application:应用层，使用了CQRS的设计模式，命令、查询、领域事件处理、集成事件处理
+			BackgroundTasks，后台任务job宿主程序，通常为控制台应用或WindowsService
+		共享层(Shared)
+			建议通过私有NuGet的仓库来存储，其他工程直接使用NuGet包来直接引用即可
+			Core:基础类型，比如异常、帮助类
+			Domain.Abstractions:领域抽象层，领域模型基类/接口、领域事件接口、领域事件处理接口、Entity接口/基类
+			Infrastructure.Core:基础设施核心层，对仓储、EFContext定义一些共享代码
+
+	依赖关系
+		共享层:该层内的工程独立不依赖项目中其他任何工程
+			Core独立，Infrastructure.Core -> Domain.Abstractions
+		基础设施层:依赖共享层中的基础设施工程
+		应用层:依赖基础设施层
+
+	总结
+		1. 领域模型专注业务的设计，不依赖仓储等基础设施层
+		2. 基础设施的仓储层仅负责领域模型的取出和存储
+		3. 使用 CQRS 模式设计应用层
+		4. Web API 是面向前端的交互接口，避免依赖领域模型
+		5. 将共享代码设计为共享包，使用私有NuGet仓库分发管理
+
+
+定义Entity -- 区分领域模型的内在逻辑和外在行为
+	领域模型的设计和实现
+		抽象层，定义了公共的接口、类
+		领域模型定义层
+	要点
+		将领域模型字段的修改设置为私有
+		使用构造函数表示对象的创建
+		使用具有业务含义的动作来操作模型字段
+		领域模型负责对自己数据的处理
+		领域服务或命令处理者负责调用领域模型业务动作
+
+工作单元模式 -- UnitOfWork，管理好你的事务
+	特性
+		需要使用同一上下文
+		跟踪实体的状态
+		保障事务的一致性
+
+定义仓储 -- 使用EF Core实现仓储层
+	泛型仓储中的实体类型，必须继承自Entity基类，和聚合根接口 IAggregateRoot
+
+领域事件 -- 提升业务内聚，实现模块解耦
+	领域事件是定义在 领域模型层中 Events 文件夹内，需要实现 IDomainEvent 接口
+	领域事件处理器是定义在 应用层 DomainEventHandles 文件夹内，需要实现 IDomainEventHandle 接口
+
+	总结：
+		由领域模型内部创建事件
+			整个领域事件是由领域的业务逻辑触发的，而不是外面对模型的操作出发的
+		由专有的领域事件处理类来处理领域事件
+			
+		根据实际情况来决定是否在同一事务中处理（如一致性、性能等因素，，，需要考虑如一致性、中间出错、消息丢失的问题等）
+
+APIController -- 定义API的最佳实践
+	在DDD领域驱动设计的理念下，我们更倾向于把应用程序的每一层明确区分，然后层与层之间的界限应该是明确的，实现上也是隔离的
+	Controller层，负责与前端用户的交互，主要的责任就是定义用户输入和响应输出，不应该去负责处理领域模型、仓储等
+	依赖对象，尽量通过Controller的构造函数注入，非多处使用的服务建议使用[FromService]注入，避免多出实例化对象造成代码混乱失控
+	Action尽量定义为异步，使用async/await组合
+
+	总结
+		负责用户的输入输出定义
+		负责身份认证与授权
+		与领域服务职责区分隔离，不承载业务逻辑
+
+集成事件 -- 解决跨微服务的最终一致性
+	目的是为了实现系统的集成，主要是用来系统中多个微服务之间相互传递事件
+	命名方式：事件名+集成事件后缀（OrderCreatedIntegrationEvent）
+	可以借助一些开源框架，来实现集成事件的发布和订阅能力（DotNetCore.CAP）
+	实现方式
+		发布订阅：MicrosoftA -Publish event-> [EventBus (Publish/Subscribe Channel)] -Event-> MicroserviceB/MicroserviceC...
+		观察者模式：由观察者发送给关注事件的人
+			定义位置：应用层 /Application/IntegrationEvents，包含发布和订阅逻辑
+
+	总结
+		集成事件是跨服务的领域事件
+		集成事件一般由领域事件驱动触发（也可能是定时任务触发）
+		不通过事务来处理集成事件（实现最终一致性）
+		仅在必要的情况下定义和使用集成事件
+			比如引入了集成事件的EventBus，应用程序的存在多版本时，版本之间的事件的发布和订阅都会受到影响，我们没办法使应用程序成为一个单纯的无状态的程序，
+			更新新版本时就会带来负担，兼容性方面需要做很多的工作
+    
+集成事件 -- 使用RabbitMQ来实现EventBus
+	如何通过CAP组件和RabbitMQ来实现EventBus
+	RabbitMQ
+		实现了高级消息队列协议（AMQP）的消息队列服务
+		安装RabbitMQ：rabbitmq.com/download.html
+
+	流程
+		创建订单，触发OrderCreated领域事件 -> OrderCreated领域事件处理器向EventBus发布了一个OrderCreated集成事件 -> 订阅服务中接收到OrderCreated集成事件
+		对应的数据库中，cap.published表、cap.received表会产生集成事件记录
+	实现原理
+		事件表 -- 发布、接收事件的存储
+		事务控制 -- 事件的处理，嵌入到业务逻辑的事务中区，保证业务与事件的一致性
+	
+MediatR -- 中介者工具，轻松实现命令查询职责分离模式（CQRS）
+
+	IPipelineBehavior
+		GeekTime.Infrastructure.Core/Behaviors
+		类似中间件执行方式，在命令或者领域事件处理的之前或之后插入逻辑
+		Handle函数的参数 RequestHandlerDelegate，是指CommandHandler或者EventHandler的具体逻辑，在此之前可以加入其它处理逻辑
+
+	核心对象
+		IMediator		
+		IRequest、IRequest<T>
+		IRequestHandler<int TRequest,TResponse>
+
+	处理领域事件
+		IMediator
+		INotification
+		INotivicationHandler<in TNotification>
+
+
+		
+

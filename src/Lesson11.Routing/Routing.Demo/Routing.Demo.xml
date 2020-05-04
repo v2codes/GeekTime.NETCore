@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Routing.Demo</name>
+    </assembly>
+    <members>
+        <member name="T:Routing.Demo.Constraints.MyRouteConstraint">
+            <summary>
+            自定义路由约束
+            </summary>
+        </member>
+        <member name="M:Routing.Demo.Constraints.MyRouteConstraint.Match(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Routing.IRouter,System.String,Microsoft.AspNetCore.Routing.RouteValueDictionary,Microsoft.AspNetCore.Routing.RouteDirection)">
+            <summary>
+            
+            </summary>
+            <param name="httpContext"></param>
+            <param name="route"></param>
+            <param name="routeKey"></param>
+            <param name="values"></param>
+            <param name="routeDirection"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Routing.Demo.Controllers.OrderController">
+            <summary>
+            订单接口
+            </summary>
+        </member>
+        <member name="M:Routing.Demo.Controllers.OrderController.OrderExist(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="id">必须可以转为long型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Routing.Demo.Controllers.OrderController.Max(System.Int64,Microsoft.AspNetCore.Routing.LinkGenerator)">
+            <summary>
+            
+            </summary>
+            <param name="id">最大20</param>
+            <param name="linkGenerator"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Routing.Demo.Controllers.OrderController.Reque">
+            <summary>
+            
+            </summary>
+            <param name="name">必填</param>
+            <returns></returns>
+        </member>
+        <member name="M:Routing.Demo.Controllers.OrderController.Number(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="number">三个数字开始</param>
+            <returns></returns>
+        </member>
+        <member name="T:Routing.Demo.Program">
+            <summary>
+            路由与终结点 -- 如何规划好你的Web API
+                注册方式
+                    路由模板方式
+                    RouteAttribute方式
+                路由约束
+                    类型约束
+                    范围约束
+                    正则表达式
+                    是否必选
+                    自定义IRouteConstraint
+                URL生成
+                    用来反向的根据路由信息生成URL地址
+                    LinkGenerator
+                    IUrlHelper
+            </summary>
+        </member>
+    </members>
+</doc>

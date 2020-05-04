@@ -1,0 +1,15 @@
+{
+  "profiles": {
+    "ConfigureConsole.Demo": {
+      "commandName": "Project",
+      "commandLineArgs": "CommandLineKey1=value1 --CommandLineKey2=value2 /CommandLineKey3=value3 -k1=k3",
+      "environmentVariables": {
+        "key2": "value2",
+        "XIAO_KEY1": "xiao key1",
+        "key1": "value1",
+        "SECTION1__KEY3": "value3",
+        "SECTION1__SECTION2__KEY4": "value4"
+      }
+    }
+  }
+}
