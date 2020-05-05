@@ -225,10 +225,10 @@ namespace ConfigureConsole.Demo
 
                 Console.WriteLine($"lastTime:{configurationRoot["lastTime"]}");
                 ChangeToken.OnChange(() => configurationRoot.GetReloadToken(), state =>
-                  {
-                      var root = (ConfigurationRoot)state;
-                      Console.WriteLine($"lastTime:{root["lastTime"]}");
-                  }, configurationRoot);
+                {
+                    var root = (ConfigurationRoot)state;
+                    Console.WriteLine($"lastTime:{root["lastTime"]}");
+                }, configurationRoot);
             }
             #endregion
 
