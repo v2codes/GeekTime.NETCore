@@ -27,7 +27,7 @@ namespace LoggerScope.Web.Controllers
         public async Task<IEnumerable<WeatherForecast>> Get()
         {
             _logger.LogInformation("开始Get了");
-
+            await Task.Delay(5000);
             _logger.LogInformation("Get睡醒了");
 
             var rng = new Random();
