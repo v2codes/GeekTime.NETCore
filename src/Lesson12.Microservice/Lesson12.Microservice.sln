@@ -16,6 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "__readme", "__readme", "{A9
 		01.总览.txt = 01.总览.txt
 		02.定义Entity.txt = 02.定义Entity.txt
 		03.工作单元模式.仓储层.txt = 03.工作单元模式.仓储层.txt
+		04.领域事件.txt = 04.领域事件.txt
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekTime.Core", "GeekTime.Core\GeekTime.Core.csproj", "{7FD61E55-F65F-4891-84E1-7C2DEBD8ABF1}"

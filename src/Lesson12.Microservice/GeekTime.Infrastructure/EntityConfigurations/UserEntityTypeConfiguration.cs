@@ -15,6 +15,9 @@ namespace GeekTime.Infrastructure.EntityConfigurations
         public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.HasKey(p => p.Id);
+
+            // 指定表名
+            builder.ToTable("User");
         }
     }
 }

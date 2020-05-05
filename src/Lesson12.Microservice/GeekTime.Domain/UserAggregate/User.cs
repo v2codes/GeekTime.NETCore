@@ -10,5 +10,8 @@ namespace GeekTime.Domain.UserAggregate
     /// </summary>
     public class User : Entity<long>, IAggregateRoot
     {
+        protected User()
+        {
+        }
     }
 }

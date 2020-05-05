@@ -7,13 +7,9 @@ using System.Text;
 namespace GeekTime.Infrastructure.Repositories
 {
     /// <summary>
-    /// User 仓储实现类
+    /// 用户仓储接口
     /// </summary>
-    public class UserRepository : Repository<User, long, DomainContext>, IUserRepository
+    public interface IUserRepository : IRepository<User, long>
     {
-        public UserRepository(DomainContext context)
-            : base(context)
-        {
-        }
     }
 }
