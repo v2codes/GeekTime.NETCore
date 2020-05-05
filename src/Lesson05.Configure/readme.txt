@@ -91,11 +91,12 @@
 
 
 配置绑定 -- 使用强类型对象承载配置数据
-    引用包：Microsoft.Extensions.Configuration.Binder
+    依赖包：Microsoft.Extensions.Configuration.Binder
+
     要点
         支持将配置绑定到已有对象
         支持将配置绑定到私有属性上  
-     
+    推荐使用强类型来管理配置， 所以Bind方法在我们日常开发中用的会比较多。
 
 
 自定义配置数据源 -- 低成本实现定制化配置方案
