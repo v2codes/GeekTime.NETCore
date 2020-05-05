@@ -21,6 +21,10 @@ namespace GeekTime.Infrastructure.Core
             DbContext = dbContext;
         }
 
+        /// <summary>
+        /// 工作单元
+        /// 因为 EFContext 实现了 IUnitOfWork，所以这里直接返回 EFContext 的实例即可
+        /// </summary>
         public IUnitOfWork UnitOfWork => DbContext;
 
         public virtual TEntity Add(TEntity entity)
@@ -61,7 +65,8 @@ namespace GeekTime.Infrastructure.Core
     /// <typeparam name="TKey">主键Id类型</typeparam>
     /// <typeparam name="TDbContext">EFContext实例</typeparam>
     public abstract class Repository<TEntity, TKey, TDbContext> : Repository<TEntity, TDbContext>, IRepository<TEntity, TKey>
-            where TEntity : Entity<TKey>, IAggregateRoot where TDbContext : EFContext
+                                                                  where TEntity : Entity<TKey>, IAggregateRoot 
+                                                                  where TDbContext : EFContext
     {
         public Repository(TDbContext dbContext)
             : base(dbContext)
@@ -71,7 +76,7 @@ namespace GeekTime.Infrastructure.Core
         public virtual bool Delete(TKey id)
         {
             var entity = DbContext.Find<TEntity>(id);
-            if (entity==null)
+            if (entity == null)
             {
                 return false;
             }
@@ -82,7 +87,7 @@ namespace GeekTime.Infrastructure.Core
         public virtual async Task<bool> DeleteAsync(TKey id, CancellationToken cancellationToken = default)
         {
             var entity = await DbContext.FindAsync<TEntity>(id, cancellationToken);
-            if (entity==null)
+            if (entity == null)
             {
                 return false;
             }

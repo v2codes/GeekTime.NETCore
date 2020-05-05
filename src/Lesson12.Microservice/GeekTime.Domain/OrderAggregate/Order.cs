@@ -10,6 +10,10 @@ namespace GeekTime.Domain.OrderAggregate
     /// </summary>
     public class Order : Entity<long>, IAggregateRoot
     {
+        // 实体内字段的 set 方法都是 private 的
+        // 实体类型相关的数据操作，都应该是由我们实体来负责，而不是被外部的对象去操作
+        // 这样的好处是让我们的领域模型符合封闭开放的原则
+
         public string UserId { get; private set; }
         public string UserName { get; private set; }
         public Address Address { get; private set; }
@@ -30,6 +34,10 @@ namespace GeekTime.Domain.OrderAggregate
             //this.AddDomainEvent(new OrderCreatedDomainEvent(this));
         }
 
+        /// <summary>
+        /// 修改收货地址
+        /// </summary>
+        /// <param name="address"></param>
         public void ChangeAddress(Address address)
         {
             this.Address = address;

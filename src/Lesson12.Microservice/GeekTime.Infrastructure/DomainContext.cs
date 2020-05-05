@@ -1,5 +1,6 @@
 ﻿using DotNetCore.CAP;
 using GeekTime.Domain.OrderAggregate;
+using GeekTime.Domain.UserAggregate;
 using GeekTime.Infrastructure.Core;
 using GeekTime.Infrastructure.EntityConfigurations;
 using MediatR;
@@ -9,7 +10,7 @@ using System;
 namespace GeekTime.Infrastructure
 {
     /// <summary>
-    /// 领域数据库上下文
+    /// EFContext具体实现
     /// </summary>
     public class DomainContext : EFContext
     {
@@ -24,7 +25,7 @@ namespace GeekTime.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            #region 注册领域驱动模型与数据库对象的映射关系
+            #region 注册领域模型与数据库的映射关系
             modelBuilder.ApplyConfiguration(new OrderEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new UserEntityTypeConfiguration());
             #endregion

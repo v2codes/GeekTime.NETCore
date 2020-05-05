@@ -18,20 +18,20 @@ namespace GeekTime.Infrastructure.EntityConfigurations
             builder.HasKey(p => p.Id);
 
             // 指定表名
-            //builder.ToTable("Order");
+            builder.ToTable("Order");
 
             // 设置字段长度限制
-            //builder.Property(p => p.UserId).HasMaxLength(20);
-            //builder.Property(p => p.UserName).HasMaxLength(30);
+            builder.Property(p => p.UserId).HasMaxLength(20);
+            builder.Property(p => p.UserName).HasMaxLength(30);
 
             // 导航属性
             builder.OwnsOne(c => c.Address, a =>
             {
                 a.WithOwner();
 
-                //a.Property(p => p.City).HasMaxLength(20);
-                //a.Property(p => p.Street).HasMaxLength(50);
-                //a.Property(p => p.ZipCode).HasMaxLength(10);
+                a.Property(p => p.City).HasMaxLength(20);
+                a.Property(p => p.Street).HasMaxLength(50);
+                a.Property(p => p.ZipCode).HasMaxLength(10);
             });
         }
     }

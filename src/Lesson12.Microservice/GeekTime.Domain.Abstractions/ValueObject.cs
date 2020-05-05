@@ -27,6 +27,7 @@ namespace GeekTime.Domain.Abstractions
 
         /// <summary>
         /// 获取值对象原子值（字段值）
+        /// 将我们值对象的字段输出出来，作为唯一标识来判断我们两个对象是否想等
         /// </summary>
         /// <returns></returns>
         protected abstract IEnumerable<object> GetAtomicValues();

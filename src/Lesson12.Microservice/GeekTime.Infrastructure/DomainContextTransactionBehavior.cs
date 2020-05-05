@@ -8,7 +8,7 @@ using System.Text;
 namespace GeekTime.Infrastructure
 {
     /// <summary>
-    /// 领域实体上下文事务处理
+    /// 数据库上下文事务处理
     /// </summary>
     /// <typeparam name="TRequest"></typeparam>
     /// <typeparam name="TResponse"></typeparam>

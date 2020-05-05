@@ -104,6 +104,7 @@ namespace GeekTime.Infrastructure.Core
             {
                 throw new InvalidOperationException($"Transaction {transaction.TransactionId} is not current");
             }
+
             try
             {
                 // 提交事务之前，安全起见还是要 SaveChanges 一下，保存变更到数据库

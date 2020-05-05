@@ -1,0 +1,48 @@
+工作单元模式 -- UnitOfWork，管理好你的事务
+
+仓储层最重要的就是事务的管理，这里，我们借助EF来实现我们的工作单元模式、事务的管理
+
+特性
+	需要使用同一上下文
+	跟踪实体的状态
+	保障事务的一致性
+
+	也就是说我们对实体的操作，最终的状态都是应该如实的保存到我们的存储中进行持久化
+
+设计和实现
+	共享层：GeekTime.Infrastructure.Core
+	
+	IUnitOfWork
+		工作单元接口
+		定义了2个方法，本质上这两个方法达到的效果都是相同的，
+			SaveChangesAsync：返回值为 int，是指我们影响的数据条数
+			SaveEntitiesAsync：返回值为 bool，表示保存是否成功
+	
+	ITransaction
+		事务管理接口
+
+	TransactionBehavior
+		注入事务管理过程
+
+	EFContext
+		就是我们实现 UnitOfWork工作单元模式的核心，它实现了事务的管理和工作单元模式，接下来我们就可以借助EFContext来实现我们的仓储层
+
+
+定义仓储 -- 使用EF Core实现仓储层
+	
+	仓储抽象定义
+		共享层：GeekTime.Infrastructure.Core
+	
+		IRepository<TEntity>、IRepository<TEntity, TKey>
+			泛型仓储接口
+			泛型仓储中的实体类型，必须继承自实体基类（Entity）和聚合根接口（IAggregateRoot）
+
+	仓储具体实现
+		基础设施层：GeekTime.Infrastructure
+		
+		DomainContext
+			  EFContext的具体实现
+			  在 OnModelCreating 方法内，注册领域模型与数据库对象直接的映射关系，这些映射关系，是通过 EntityTypeConfiguration 实现的
+			  
+		EntityConfigurations
+			  用于组织我们的领域模型和数据库的关系，每一个模型都有一个映射类
