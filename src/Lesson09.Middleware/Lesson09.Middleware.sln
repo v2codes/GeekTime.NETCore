@@ -7,7 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Middleware.Demo", "Middlewa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExceptionMiddleware.Demo", "ExceptionMiddleware.Demo\ExceptionMiddleware.Demo.csproj", "{BA1ED006-60C6-4587-8269-546D770A2310}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaticFileMiddleware.Demo", "StaticFileMiddleware.Demo\StaticFileMiddleware.Demo.csproj", "{EFBADDF9-7979-481D-A997-D0A590C77BF2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StaticFileMiddleware.Demo", "StaticFileMiddleware.Demo\StaticFileMiddleware.Demo.csproj", "{EFBADDF9-7979-481D-A997-D0A590C77BF2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_readme", "_readme", "{B7091BE5-B170-426B-B4E9-27C2CC7A3FBE}"
+	ProjectSection(SolutionItems) = preProject
+		readme.txt = readme.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -41,9 +41,11 @@ namespace Middleware.Demo
             #region Use 指定全局中间件
             //app.Use(async (context, next) =>
             //{
-            //    // 执行了 next，一旦 Response 开始写入，这里将会出错
-            //    //await context.Response.WriteAsync("Hello");
-            //    await next();
+            //    // 不执行 next时，收到的所有响应结果都会是 Hello，因为当前中间件注册的最早，而且断路了后续中间件。
+            //    ////await context.Response.WriteAsync("Hello");
+            //    //await next();
+
+            //    // 执行了 next，再执行Response.Write将会出错，因为一旦 Response 开始输出，就不能对 header 进行操作了。
             //    if (context.Response.HasStarted)
             //    {
             //        //一旦已经开始输出，则不能再修改响应头的内容
@@ -68,7 +70,8 @@ namespace Middleware.Demo
             //}, builder =>
             //{
             //    // 与builder.Use方法区别
-            //    // Run 即表示当前逻辑为中间件执行的末端，不再继续执行后面的中间件，直接返回了
+            //    // use 是指我们可以像注册一个完整的中间件一样，将我们的next也注入进来，在中间件中可以决定是否执行后续的中间件
+            //    // Run 则表示当前逻辑为中间件执行的末端，不再继续执行后面的中间件，直接返回了
             //    builder.Run(async context =>
             //    {
             //        await context.Response.WriteAsync("new abc");

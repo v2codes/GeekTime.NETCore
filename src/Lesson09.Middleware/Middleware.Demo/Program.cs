@@ -11,28 +11,6 @@ namespace Middleware.Demo
 {
     /// <summary>
     /// 中间件：掌控请求处理过程的关键
-    ///     工作原理：（俄罗斯套娃）
-    ///                     Middleware1         Middleware2         Middleware3     
-    ///         Request →    //logic
-    ///                       next();     →      //logic
-    ///                                           next();     →      //logic
-    ///                                                       
-    ///                                                               //more logic
-    ///                                           //more logic   ← 
-    ///                      //more logic   ←
-    ///         Response ←
-    ///         
-    ///     核心对象
-    ///         IApplicationBuilder
-    ///             注册中间件
-    ///         RequestDelegate
-    ///             处理整个请求的委托
-    ///             
-    ///     自定义中间件（约定的方式）
-    ///         包含一个 Invoke/InvokeAsync方法，参数为 HttpContext
-    ///         
-    ///         
-    ///        
     /// </summary>
     public class Program
     {

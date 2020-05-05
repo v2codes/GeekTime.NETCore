@@ -51,13 +51,13 @@ namespace StaticFileMiddleware.Demo
             // 启用目录浏览
             //app.UseDirectoryBrowser();
 
-            // 启动静态文件中间件
+            // 启动静态文件中间件，
             app.UseStaticFiles();
 
             // 设置自定义目录静态文件
             //app.UseStaticFiles(new StaticFileOptions()
             //{
-            //    RequestPath="/files", // 设置路由映射
+            //    RequestPath="/files", // 设置路由映射，可以把任意的文件目录映射为任意的URL地址
             //    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "assets"))
             //});
 
@@ -68,7 +68,7 @@ namespace StaticFileMiddleware.Demo
                 return !context.Request.Path.Value.StartsWith("/api");
             }, appBuilder =>
             {
-                // Rewrite 方式重定向请求到 index.html
+                // Rewrite 方式重定向请求到 index.html  --> 推荐使用
                 //var option = new RewriteOptions();
                 //option.AddRewrite(".*", "/index.html", true);
                 //appBuilder.UseRewriter(option);
@@ -86,9 +86,6 @@ namespace StaticFileMiddleware.Demo
                         await StreamCopyOperation.CopyToAsync(fileStream, context.Response.Body, null, BufferSize, context.RequestAborted);
                     }
                 });
-
-
-
             });
 
             app.UseRouting();

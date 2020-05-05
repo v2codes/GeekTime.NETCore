@@ -16,6 +16,7 @@ namespace ExceptionMiddleware.Demo.Controllers
     {
         public IActionResult Index()
         {
+            // 获取当前请求上下文里报出的异常信息
             var exceptionHandlerPathFeature = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
 
             var ex = exceptionHandlerPathFeature?.Error;
