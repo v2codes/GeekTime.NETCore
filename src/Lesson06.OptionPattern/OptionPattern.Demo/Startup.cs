@@ -34,11 +34,13 @@ namespace OptionPattern.Demo
             #endregion
 
             #region 作用域：选项数据热更新 -- IOptionsSnapshot
+            // 在需要注入的地方，使用 IOptionsSnapshot<OrderServiceOptions> 即可
             //services.Configure<OrderServiceOptions>(Configuration.GetSection("OrderService"));
             //services.AddScoped<IOrderService, OrderService>();
             #endregion
 
             #region 单例：选项数据热更新 -- IOptionsMonitor
+            // 在需要注入的地方，使用 IOptionsMonitor<OrderServiceOptions> 即可
             //services.Configure<OrderServiceOptions>(Configuration.GetSection("OrderService"));
             //services.AddSingleton<IOrderService, OrderService>();
             #endregion

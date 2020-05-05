@@ -22,7 +22,7 @@ namespace OptionPattern.Demo.Services
         {
             _options = options;
 
-            // 配置发生变更，主动通知，调试模式下会通知多次
+            // 配置发生变更，主动通知，注意：调试模式下一次变更会重复通知多次
             _options.OnChange(option =>
             {
                 Console.WriteLine($"变更后的选项值：{option.MaxOrderCount}");
