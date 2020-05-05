@@ -3,7 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logging.Serilog.Demo", "Logging.Serilog.Demo\Logging.Serilog.Demo.csproj", "{793ED0B4-B2D8-4BD9-AB5A-E2EC3FEC9053}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logging.Serilog.Demo", "Logging.Serilog.Demo\Logging.Serilog.Demo.csproj", "{793ED0B4-B2D8-4BD9-AB5A-E2EC3FEC9053}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_readme", "_readme", "{95F82BDF-C7DE-4828-9318-1EFA5512E5BA}"
+	ProjectSection(SolutionItems) = preProject
+		readme.txt = readme.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
