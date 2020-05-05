@@ -23,10 +23,10 @@ namespace Routing.Demo.Constraints
         /// <returns></returns>
         public bool Match(HttpContext httpContext, IRouter route, string routeKey, RouteValueDictionary values, RouteDirection routeDirection)
         {
-            if (RouteDirection.IncomingRequest==routeDirection)
+            if (RouteDirection.IncomingRequest == routeDirection)
             {
                 var v = values[routeKey];
-                if (long.TryParse(v.ToString(),out var value))
+                if (long.TryParse(v.ToString(), out var value))
                 {
                     return true;
                 }

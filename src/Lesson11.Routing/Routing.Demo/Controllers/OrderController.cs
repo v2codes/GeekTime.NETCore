@@ -20,7 +20,7 @@ namespace Routing.Demo.Controllers
         /// </summary>
         /// <param name="id">必须可以转为long型</param>
         /// <returns></returns>
-        [HttpGet("{id:ConstraintName}")]
+        [HttpGet("{id:CustomConstraint}")]
         public bool OrderExist(object id)
         {
             return true;

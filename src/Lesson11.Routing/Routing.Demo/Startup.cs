@@ -17,6 +17,9 @@ using Routing.Demo.Constraints;
 
 namespace Routing.Demo
 {
+    /// <summary>
+    /// Startup
+    /// </summary>
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -42,7 +45,7 @@ namespace Routing.Demo
 
             // 注入自定义约束，并自定义约束名
             services.AddRouting(options => {
-                options.ConstraintMap.Add("ConstraintName", typeof(MyRouteConstraint));
+                options.ConstraintMap.Add("CustomConstraint", typeof(MyRouteConstraint));
             });
         }
 
