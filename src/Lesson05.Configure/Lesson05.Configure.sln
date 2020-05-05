@@ -3,9 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configure.Demo", "Configure.Demo\Configure.Demo.csproj", "{94B85F9C-A584-42A9-8002-12BCFF016AE6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConfigureConsole.Demo", "ConfigureConsole.Demo\ConfigureConsole.Demo.csproj", "{A366F04C-7CAA-4888-B933-2830F0581CE8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigureConsole.Demo", "ConfigureConsole.Demo\ConfigureConsole.Demo.csproj", "{A366F04C-7CAA-4888-B933-2830F0581CE8}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_readme", "_readme", "{8428AE37-C57B-4993-B41B-2027E4B850D3}"
+	ProjectSection(SolutionItems) = preProject
+		readme.txt = readme.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,10 +16,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{94B85F9C-A584-42A9-8002-12BCFF016AE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{94B85F9C-A584-42A9-8002-12BCFF016AE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{94B85F9C-A584-42A9-8002-12BCFF016AE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{94B85F9C-A584-42A9-8002-12BCFF016AE6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A366F04C-7CAA-4888-B933-2830F0581CE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A366F04C-7CAA-4888-B933-2830F0581CE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A366F04C-7CAA-4888-B933-2830F0581CE8}.Release|Any CPU.ActiveCfg = Release|Any CPU

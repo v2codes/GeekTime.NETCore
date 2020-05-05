@@ -7,72 +7,7 @@ using System.Collections.Generic;
 namespace ConfigureConsole.Demo
 {
     /// <summary>
-    /// 配置框架 -- 让服务无缝适应各种环境
-    ///     配置方式
-    ///         通常是以key-value字符串键值对的方式抽象配置（JSON/XML）
-    ///         支持从各种不同数据源读取配置(命令行、环境变量、文件等)
-    ///     核心组件包
-    ///         Microsoft.Extensions.Configuration.Abstractions
-    ///         Microsoft.Extensions.Configuration
-    ///     核心类型
-    ///         IConfiguration:
-    ///         IConfigurationRoot:配置的根，所有读取配置项的动作都是在这里完成
-    ///         IConfigurationSection:是指配置分组节点，每一节用冒号作为分隔符
-    ///         IConfigurationBuilder:构建应用程序配置的核心,所有的设置都在builder中完成
-    ///     核心扩展点（通过扩展，指定任意的配置的数据来源来注入到框架）
-    ///         IConfigurationSource
-    ///         IConfigurationProvider
-    ///         
-    /// 命令行参数配置方式 -- 最简单快捷的配置注入方法
-    ///     引用包：Microsoft.Extensions.Configuration.CommandLine
-    ///     无前缀 key=value 模式
-    ///     双中横线模式 --key=value 或者 --key value
-    ///     正斜杠模式 /key=value 或 /key value
-    ///     备注：等号分隔符和空格分隔符不能混用
-    ///     
-    ///     命令替换模式
-    ///         必须以单横线(-)或双划线(--)开头
-    ///         映射字典不能包含重复Key
-    ///         
-    /// 环境变量参数配置方式  -- 容器环境下配置注入的最佳途径
-    ///     引用包：Microsoft.Extensions.Configuration.EnvironmentVariables
-    ///     适用场景
-    ///         在Docker中运行时
-    ///         在Kubernetes中运行时
-    ///         需要设置ASP.NET Core的一些内置特殊配置时
-    ///     特性
-    ///         对于配置的分层健，支持用双下划线"__"代替":"
-    ///         支持根据前缀加载
-    ///         
-    /// 文件配置提供程序 -- 自由选择配置的格式
-    ///     引用包：读取不同文件格式，或者不同位置来读取配置文件
-    ///         Microsoft.Extensions.Configuration.Ini
-    ///         Microsoft.Extensions.Configuration.Json
-    ///         Microsoft.Extensions.Configuration.NewtonsoftJson
-    ///         Microsoft.Extensions.Configuration.Xml
-    ///         Microsoft.Extensions.Configuration.UserSecrets
-    ///     特性
-    ///         文件提供程序支持指定文件可选、必选
-    ///         支持指定是否监视文件的变更
-    ///     
-    ///     监视配置文件变更 -- 配置热更新能力的核心
-    ///         IChangeToken IConfiguration.GetReloadToken()
-    ///         场景：需要记录配置源变更、需要在配置项变更时触发特定操作时
-    ///         只能触发一次，如需持续监视，需要在变更时重新获取 token 并注册变更回调 RegisterChangeCallback
-    ///         使用 ChangeToken.OnChange()，持续监视配置文件变化
-    ///         
-    /// 配置绑定 -- 使用强类型对象承载配置数据
-    ///     引用包：Microsoft.Extensions.Configuration.Binder
-    ///     要点
-    ///         支持将配置绑定到已有对象
-    ///         支持将配置绑定到私有属性上  
-    ///      
-    /// 自定义配置数据源 -- 低成本实现定制化配置方案
-    ///     扩展步骤
-    ///         实现 IConfigurationSource
-    ///         实现 IConfigurationProvider
-    ///         实现 AddXXX扩展方法
-    ///     
+    /// 配置框架
     /// </summary>
     class Program
     {
@@ -110,12 +45,13 @@ namespace ConfigureConsole.Demo
             }
             #endregion
 
-            #region 命令替换模式
+            // 命令行参数配置方式
+            #region 命令行模式
             {
                 //var builder = new ConfigurationBuilder();
 
                 //// 命名空间：Microsoft.Extensions.Configuration.CommandLine
-                //// 等同于 launchSettings.json 中的 commandLineArgs
+                //// 项目属性->调试->应用程序参数。等同于：launchSettings.json 中的 commandLineArgs
                 //// builder.AddCommandLine(args);
 
                 //// 命令替换 
@@ -136,7 +72,7 @@ namespace ConfigureConsole.Demo
                 //var builder = new ConfigurationBuilder();
 
                 //// 命名空间：Microsoft.Extensions.Configuration.EnvironmentVariables
-                //// 等同于 launchSettings.json 中的 environmentVariables
+                //// 项目属性->调试->环境变量。等同于： launchSettings.json 中的 environmentVariables
                 //builder.AddEnvironmentVariables();
 
                 //var configurationRoot = builder.Build();
@@ -172,10 +108,12 @@ namespace ConfigureConsole.Demo
             #region 文件配置
             {
                 //var builder = new ConfigurationBuilder();
-                //// optional:是否可选，默认false即必须有
-                //// reloadOnChange:文件变更是否重新加载
+                //// optional:是否可选，默认false即必须有   reloadOnChange:文件变更是否重新加载
                 //builder.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true); // json
                 //builder.AddIniFile("appsettings.ini", optional: false, reloadOnChange: true);// ini
+
+                // 后添加的配置，优先级更高，会覆盖 appsettings.json 中的 key2 配置项
+                //builder.AddJsonFile("appsettings.Development");
 
                 //var configurationRoot = builder.Build();
 
@@ -218,6 +156,7 @@ namespace ConfigureConsole.Demo
                 ////    token = root.GetReloadToken();
                 ////    token.RegisterChangeCallback(state =>
                 ////    {
+                ////        // 直接访问 configurationRoot对象，或 (ConfigurationRoot)state
                 ////        var root = (ConfigurationRoot)state;
                 ////        Console.WriteLine("配置文件变更：");
                 ////        Console.WriteLine($"key1:{root["Key1"]}");
