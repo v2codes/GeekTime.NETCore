@@ -11,6 +11,9 @@ namespace GeekTime.Domain.Events
     /// </summary>
     public class OrderCreatedDomainEvent : IDomainEvent
     {
+        /// <summary>
+        /// 写入私有，读取公开
+        /// </summary>
         public Order Order { get; private set; }
         public OrderCreatedDomainEvent(Order order)
         {

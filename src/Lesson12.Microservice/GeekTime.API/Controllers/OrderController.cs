@@ -32,19 +32,19 @@ namespace GeekTime.API.Controllers
         public async Task<long> CreateOrder([FromBody] CreateOrderCommand cmd)
         {
             // 中间者，发送订单创建命令
-            return await _mediator.Send(cmd);
+            return await _mediator.Send(cmd, HttpContext.RequestAborted);
         }
 
-        /// <summary>
-        /// 我的订单
-        /// </summary>
-        /// <param name="myOrderQuery"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public async Task<List<string>> QueryOrder([FromBody] MyOrderQuery myOrderQuery)
-        {
-            return await _mediator.Send(myOrderQuery);
-        }
+        ///// <summary>
+        ///// 我的订单
+        ///// </summary>
+        ///// <param name="myOrderQuery"></param>
+        ///// <returns></returns>
+        //[HttpPost]
+        //public async Task<List<string>> QueryOrder([FromBody] MyOrderQuery myOrderQuery)
+        //{
+        //    return await _mediator.Send(myOrderQuery);
+        //}
     }
 
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace GeekTime.API.Application.IntegrationEvents
 {
     /// <summary>
-    /// 集成事件：订单创建
+    /// 集成事件：订单创建完成
     /// </summary>
     public class OrderCreatedIntegrationEvent
     {

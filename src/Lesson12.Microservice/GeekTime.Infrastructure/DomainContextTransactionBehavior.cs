@@ -14,7 +14,7 @@ namespace GeekTime.Infrastructure
     /// <typeparam name="TResponse"></typeparam>
     public class DomainContextTransactionBehavior<TRequest, TResponse> : TransactionBehavior<DomainContext, TRequest, TResponse>
     {
-        public DomainContextTransactionBehavior(DomainContext dbContext, ICapPublisher capBus, ILogger logger)
+        public DomainContextTransactionBehavior(DomainContext dbContext, ICapPublisher capBus, ILogger<DomainContextTransactionBehavior<TRequest, TResponse>> logger)
             : base(dbContext, capBus, logger)
         {
         }

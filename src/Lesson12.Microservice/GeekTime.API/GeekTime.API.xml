@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GeekTime.API</name>
+    </assembly>
+    <members>
+        <member name="T:GeekTime.API.Application.Commands.CreateOrderCommand">
+            <summary>
+            创建订单 Command
+            </summary>
+        </member>
+        <member name="T:GeekTime.API.Application.Commands.CreateOrderCommandHandler">
+            <summary>
+            领域事件:订单创建命令处理程序
+            注：在创建完我们的领域模型并将其保存之后才会触发该处理程序
+            </summary>
+        </member>
+        <member name="M:GeekTime.API.Application.Commands.CreateOrderCommandHandler.Handle(GeekTime.API.Application.Commands.CreateOrderCommand,System.Threading.CancellationToken)">
+            <summary>
+            处理订单创建命令
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:GeekTime.API.Application.DomainEventHandlers.OrderCreatedDomainEventHandler">
+            <summary>
+            创建Order领域事件处理
+            </summary>
+        </member>
+        <member name="M:GeekTime.API.Application.DomainEventHandlers.OrderCreatedDomainEventHandler.Handle(GeekTime.Domain.Events.OrderCreatedDomainEvent,System.Threading.CancellationToken)">
+            <summary>
+            领域事件处理
+            </summary>
+            <param name="notification"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:GeekTime.API.Application.IntegrationEvents.OrderCreatedIntegrationEvent">
+            <summary>
+            集成事件：订单创建
+            </summary>
+        </member>
+        <member name="T:GeekTime.API.Application.IntegrationEvents.OrderPaymentSucceededIntegrationEvent">
+            <summary>
+            集成事件：订单支付成功
+            </summary>
+        </member>
+        <member name="T:GeekTime.API.Application.IntegrationEvents.SubscriberService">
+            <summary>
+            集成事件订阅服务
+            </summary>
+        </member>
+        <member name="M:GeekTime.API.Application.IntegrationEvents.SubscriberService.OrderCreatedSucceeded(GeekTime.API.Application.IntegrationEvents.OrderCreatedIntegrationEvent)">
+            <summary>
+            订阅订单创建成功集成事件
+            </summary>
+            <param name="event"></param>
+        </member>
+        <member name="M:GeekTime.API.Application.IntegrationEvents.SubscriberService.OrderPaymentSucceeded(GeekTime.API.Application.IntegrationEvents.OrderPaymentSucceededIntegrationEvent)">
+            <summary>
+            订阅订单支付成功集成事件
+            </summary>
+            <param name="event"></param>
+        </member>
+        <member name="T:GeekTime.API.Application.Queries.MyOrderQuery">
+            <summary>
+            我的订单查询
+            </summary>
+        </member>
+        <member name="T:GeekTime.API.Application.Queries.MyOrderQueryHandler">
+            <summary>
+            查询处理类
+            </summary>
+        </member>
+        <member name="F:GeekTime.API.Controllers.OrderController._mediator">
+            <summary>
+            中间者
+            </summary>
+        </member>
+        <member name="M:GeekTime.API.Controllers.OrderController.CreateOrder(GeekTime.API.Application.Commands.CreateOrderCommand)">
+            <summary>
+            创建订单
+            </summary>
+            <param name="cmd"></param>
+            <returns></returns>
+        </member>
+        <member name="T:GeekTime.API.Extensions.ServiceCollectionExtensions">
+            <summary>
+            服务注册扩展
+            </summary>
+        </member>
+        <member name="M:GeekTime.API.Extensions.ServiceCollectionExtensions.AddMediatRServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            注册 ？？？
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GeekTime.API.Extensions.ServiceCollectionExtensions.AddDomainContext(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.EntityFrameworkCore.DbContextOptionsBuilder})">
+            <summary>
+            注册EF上下文
+            </summary>
+            <param name="services"></param>
+            <param name="optionsAction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GeekTime.API.Extensions.ServiceCollectionExtensions.AddInMemoryDomainContext(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            注册内存EF上下文
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GeekTime.API.Extensions.ServiceCollectionExtensions.AddMySqlDomainContext(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String)">
+            <summary>
+            注册MySql服务
+            </summary>
+            <param name="services"></param>
+            <param name="connectionString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GeekTime.API.Extensions.ServiceCollectionExtensions.AddRepositories(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            注册仓储服务
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GeekTime.API.Extensions.ServiceCollectionExtensions.AddEventBus(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            注册EventBus（集成事件处理服务）
+            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

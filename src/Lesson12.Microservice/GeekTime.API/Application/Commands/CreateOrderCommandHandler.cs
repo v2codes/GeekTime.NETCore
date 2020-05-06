@@ -34,7 +34,7 @@ namespace GeekTime.API.Application.Commands
         public async Task<long> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
             var address = new Address("wen san lu", "hangzhou", "310000");
-            var order = new Order("xiaohong1999", "小红", 25, address);
+            var order = new Order("xiaohong1999", "小红", (int)request.ItemCount, address);
 
             _orderRepository.Add(order);
             await _orderRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);

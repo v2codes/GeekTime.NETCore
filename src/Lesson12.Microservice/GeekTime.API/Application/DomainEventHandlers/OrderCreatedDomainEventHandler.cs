@@ -27,11 +27,12 @@ namespace GeekTime.API.Application.DomainEventHandlers
         /// <param name="notification"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public async Task Handle(OrderCreatedDomainEvent notification, CancellationToken cancellationToken)
+        public Task Handle(OrderCreatedDomainEvent notification, CancellationToken cancellationToken)
         {
-            // 当创建新订单时，向EventBus发布一条集成事件
-            await _capPublisher.PublishAsync("OrderCreated", new OrderCreatedIntegrationEvent(notification.Order.Id));
-            //return Task.CompletedTask;
+            // 当创建新订单时，向 EventBus 发布一个事件
+            // await _capPublisher.PublishAsync("OrderCreated", new OrderCreatedIntegrationEvent(notification.Order.Id));
+            _capPublisher.Publish("OrderCreated", new OrderCreatedIntegrationEvent(notification.Order.Id));
+            return Task.CompletedTask;
         }
     }
 }

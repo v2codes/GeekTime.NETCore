@@ -1,11 +1,36 @@
 领域事件 -- 提升业务内聚，实现模块解耦
 
-	领域事件是定义在 领域模型层中 Events 文件夹内，需要实现 IDomainEvent 接口
-	领域事件处理器是定义在 应用层 DomainEventHandles 文件夹内，需要实现 IDomainEventHandle 接口
+领域事件接口
+	共享层：抽象项目 --> IDomainEvent
 
-	总结：
-		由领域模型内部创建事件
-			整个领域事件是由领域的业务逻辑触发的，而不是外面对模型的操作出发的
-		由专有的领域事件处理类来处理领域事件
+	IDomainEvent
+		用来标记我们某一个对象是否是领域事件，继承 MediatR 的 INotification 接口
+	INotification
+		MideatR框架中的接口，也是空接口，用来实现事件传递用的
+
+领域事件处理接口
+	共享层：抽象项目 --> IDomainEventHandler<TDomainEvent>
+
+	IDomainEventHandler
+		用来处理特定的实现了 IDomainEvent 的领域事件，继承 MediatR 的 INotificationHandler<TDomainEvent> 接口
+		使用 INotificationHandler 内的 Handler 方法
+
+领域事件的定义
+	领域模型层中 Events 文件夹内，需要实现 IDomainEvent 接口
+
+领域事件处理器定义
+	应用层 DomainEventHandles 文件夹内，需要实现 IDomainEventHandle 接口
+
+领域模型对领域事件的处理
+	在 Entity 基类内，定义了领域事件的存储、操作，并对外公开领域事件的访问属性。
+
+工作流程 ？？？？ --> 有点乱，拎不清咯！！！！！！！！
+	接口收到创建订单命令 --> 使用中间者发送订单创建命令 --> 订单创建命令处理程序触发处理 
+	--> 仓储存储完毕之后，通过中间者发布订单创建完成集成事件 --> 经过MediatR找到对应的领域事件处理程序，触发执行
+
+总结：
+	由领域模型内部创建事件
+		整个领域事件是由领域的业务逻辑触发的，而不是外面对模型的操作出发的
+	由专有的领域事件处理类来处理领域事件
 			
-		根据实际情况来决定是否在同一事务中处理（如一致性、性能等因素，，，需要考虑如一致性、中间出错、消息丢失的问题等）
+	根据实际情况来决定是否在同一事务中处理（如一致性、性能等因素，，，需要考虑如一致性、中间出错、消息丢失的问题等）

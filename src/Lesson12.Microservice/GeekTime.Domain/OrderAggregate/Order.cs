@@ -1,4 +1,5 @@
 ﻿using GeekTime.Domain.Abstractions;
+using GeekTime.Domain.Events;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -31,7 +32,7 @@ namespace GeekTime.Domain.OrderAggregate
             this.Address = address;
 
             // 构造新的Order对象的时候，添加一个创建Order领域事件
-            //this.AddDomainEvent(new OrderCreatedDomainEvent(this));
+            this.AddDomainEvent(new OrderCreatedDomainEvent(this));
         }
 
         /// <summary>
@@ -42,7 +43,7 @@ namespace GeekTime.Domain.OrderAggregate
         {
             this.Address = address;
 
-            // 同样的，在修改地址时，也可以定义一个修改地址领域事件
+            // 同样的，在修改地址操作时，也该定义一个类似的修改地址领域事件
             //this.AddDomainEvent(new OrderAddressChangedDomainEvent(this));
         }
     }

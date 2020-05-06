@@ -31,7 +31,7 @@ namespace GeekTime.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
 
             // 注册 Swagger服务
             services.AddSwaggerGen(c =>
@@ -42,7 +42,7 @@ namespace GeekTime.API
                 c.IncludeXmlComments(xmlPath);
             });
 
-            // 
+            // 注册中间者：MediatR 
             services.AddMediatRServices();
 
             // 注册 MySql 数据库上下文 
@@ -68,6 +68,11 @@ namespace GeekTime.API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "MY API v1.0");
+                });
             }
 
             app.UseHttpsRedirection();
