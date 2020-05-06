@@ -1,0 +1,42 @@
+集成事件 -- 使用RabbitMQ来实现EventBus
+
+如何通过CAP组件和RabbitMQ来实现EventBus？
+
+RabbitMQ
+	下载地址：https://www.rabbitmq.com/download.html
+
+CAP框架
+	项目地址：https://github.com/dotnetcore/CAP
+	由国人开发的，实现了开箱即用的 EventBus 的实现，通过简单的配置就可以把 RabbitMQ 集成进来，并且实现我们的集成事件的处理。
+	CAP框架实际上实现了一个叫做 Outbox 的设计模式：
+		发布
+			微服务A，对应的数据库A，会在这个数据库内部会建立两张表：publish事件表、receive事件表，用来记录微服务A发出的和接收到的事件。
+			当发出事件时，会把事件的存储逻辑与我们业务逻辑的事务合并，在同一个事务内提交，也就是当业务逻辑提交成功时，我们的事件表里的事件是一定存在的，它是与我们的业务逻辑的事务强绑定的。
+			接下来，由CAP组件来负责将事件表里的事件发送到 EventBus，比如 RabbitMQ消息队列中
+
+		订阅
+			当服务在消息队列获取到事件消息的时候，会将这些消息持久化到数据库中，之后就可以在本地进行事件的处理、失败重试等操作。
+
+事务处理
+	前面提及的CAP架构，关键的一点是需要事件的存储与我们业务逻辑在同一个事务里，所以在外面处理事务的逻辑中需要嵌入CAP的代码，参见 EFContext 的定义。
+
+注入配置CAP + RabbitMQ
+	应用层
+		扩展类：Extensions/ServiceCollectionExtensions.cs 文件
+		Startup：services.AddEventBus(Configuration)
+		RabbitMQ配置：appsettings.json
+
+
+
+
+RabbitMQ
+	实现了高级消息队列协议（AMQP）的消息队列服务
+	安装RabbitMQ：rabbitmq.com/download.html
+
+流程
+	创建订单，触发OrderCreated领域事件 -> OrderCreated领域事件处理器向EventBus发布了一个OrderCreated集成事件 -> 订阅服务中接收到OrderCreated集成事件
+	对应的数据库中，cap.published表、cap.received表会产生集成事件记录
+实现原理
+	事件表 -- 发布、接收事件的存储
+	事务控制 -- 事件的处理，嵌入到业务逻辑的事务中区，保证业务与事件的一致性
+	

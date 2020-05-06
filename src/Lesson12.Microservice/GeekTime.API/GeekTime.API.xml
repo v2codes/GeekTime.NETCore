@@ -36,9 +36,14 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
+        <member name="T:GeekTime.API.Application.IntegrationEvents.ISubscriberService">
+            <summary>
+            领域事件订阅者接口
+            </summary>
+        </member>
         <member name="T:GeekTime.API.Application.IntegrationEvents.OrderCreatedIntegrationEvent">
             <summary>
-            集成事件：订单创建
+            集成事件：订单创建完成
             </summary>
         </member>
         <member name="T:GeekTime.API.Application.IntegrationEvents.OrderPaymentSucceededIntegrationEvent">

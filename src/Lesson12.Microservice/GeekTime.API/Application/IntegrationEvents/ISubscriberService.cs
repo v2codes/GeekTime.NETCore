@@ -5,7 +5,12 @@ using System.Threading.Tasks;
 
 namespace GeekTime.API.Application.IntegrationEvents
 {
-    public class ISubscriberService
+    /// <summary>
+    /// 领域事件订阅者接口
+    /// </summary>
+    public interface ISubscriberService
     {
+        void OrderPaymentSucceeded(OrderPaymentSucceededIntegrationEvent @event);
+        void OrderCreatedSucceeded(OrderCreatedIntegrationEvent @event);
     }
 }

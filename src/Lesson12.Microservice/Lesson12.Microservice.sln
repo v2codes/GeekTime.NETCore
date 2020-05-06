@@ -17,6 +17,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "__readme", "__readme", "{A9
 		02.定义Entity.txt = 02.定义Entity.txt
 		03.工作单元模式.仓储层.txt = 03.工作单元模式.仓储层.txt
 		04.领域事件.txt = 04.领域事件.txt
+		05.APIController.txt = 05.APIController.txt
+		06.集成事件.txt = 06.集成事件.txt
+		07.集成事件.RabbitMQ.txt = 07.集成事件.RabbitMQ.txt
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekTime.Core", "GeekTime.Core\GeekTime.Core.csproj", "{7FD61E55-F65F-4891-84E1-7C2DEBD8ABF1}"
@@ -31,7 +34,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekTime.Infrastructure", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekTime.API", "GeekTime.API\GeekTime.API.csproj", "{E8295A43-AA5F-4428-A84F-39EFB96EF52B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekTime.BackgroundTasks", "GeekTime.BackgroundTasks\GeekTime.BackgroundTasks.csproj", "{66391EBF-6214-4ED0-B87D-DB04E675A4C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekTime.BackgroundTasks", "GeekTime.BackgroundTasks\GeekTime.BackgroundTasks.csproj", "{66391EBF-6214-4ED0-B87D-DB04E675A4C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

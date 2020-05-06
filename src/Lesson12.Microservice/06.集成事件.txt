@@ -1,0 +1,39 @@
+集成事件 -- 解决跨微服务的最终一致性
+
+工作原理
+	目的是为了实现系统的集成，主要是用来系统中多个微服务之间相互传递事件
+
+	实现方式有2种
+		1）发布订阅
+																					     --Event-->  Microservice B
+																					   ／
+			MicroserviceA --publish event-->  [Event Bus（Publish/Subscribe Channel）] 
+																					   ＼
+																						 --Event-->  Microservice B
+
+		2）观察者模式
+			由观察者将事件发送给关注事件的人
+			定义位置：应用层 /Application/IntegrationEvents，包含发布和订阅逻辑
+
+定义目录
+	应用层：API项目的 Application/IntegrationEvents 目录下
+
+命名方式：事件名 + 集成事件后缀（OrderCreatedIntegrationEvent）
+
+DotNetCore.CAP
+	可以借助这个开源框架，来实现集成事件的发布和订阅能力，实现将消息发送到 RabbitMQ、Kafaka 等等消息队列中间件中，可配置
+
+
+订阅其他微服务发出的消息
+	这里，我们同样也借助了CAP框架实现，通过实现 ISubscribeService、ICapSubscribe接口，将服务标记为订阅服务。
+
+集成事件是没有接口和基类约束的，在异构的系统中对于集成事件来说，定义是相对比较灵活的，建议使用类似简单的类型来承载它即可
+
+
+总结
+	集成事件是跨服务的领域事件
+	集成事件一般由领域事件驱动触发（也可能是定时任务触发）
+	不通过事务来处理集成事件（实现最终一致性）
+	仅在必要的情况下定义和使用集成事件
+		比如引入了集成事件的EventBus，应用程序的存在多版本时，版本之间的事件的发布和订阅都会受到影响，我们没办法使应用程序成为一个单纯的无状态的程序，
+		更新新版本时就会带来负担，兼容性方面需要做很多的工作
