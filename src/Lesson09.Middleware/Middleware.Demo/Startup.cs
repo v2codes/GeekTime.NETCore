@@ -55,6 +55,10 @@ namespace Middleware.Demo
             #endregion
 
             #region Map 对特定路由地址指定中间
+            // builder.Use、builder.Run方法区别
+            //      use 是指我们可以像注册一个完整的中间件一样，将我们的 next 也注入进来，在中间件中可以决定是否执行后续的中间件
+            //      Run 则表示当前逻辑为中间件执行的末端，不再继续执行后面的中间件，直接返回了
+
             //app.Map("/abc", abcBuilder =>
             //{
             //    abcBuilder.Use(async (context, next) =>
@@ -69,9 +73,6 @@ namespace Middleware.Demo
             //    return context.Request.Query.Keys.Contains("abc");
             //}, builder =>
             //{
-            //    // 与builder.Use方法区别
-            //    // use 是指我们可以像注册一个完整的中间件一样，将我们的next也注入进来，在中间件中可以决定是否执行后续的中间件
-            //    // Run 则表示当前逻辑为中间件执行的末端，不再继续执行后面的中间件，直接返回了
             //    builder.Run(async context =>
             //    {
             //        await context.Response.WriteAsync("new abc");

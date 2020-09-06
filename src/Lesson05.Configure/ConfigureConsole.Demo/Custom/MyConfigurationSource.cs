@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ConfigureConsole.Demo.Custom
 {
-    public class MyConfigurationSource : IConfigurationSource
+    class MyConfigurationSource : IConfigurationSource
     {
         public IConfigurationProvider Build(IConfigurationBuilder builder)
         {

@@ -7,7 +7,7 @@ using System.Timers;
 
 namespace ConfigureConsole.Demo.Custom
 {
-    public class MyConfigurationProvider : ConfigurationProvider//, IConfigurationProvider
+    class MyConfigurationProvider : ConfigurationProvider//, IConfigurationProvider
     {
         Timer timer;
         public MyConfigurationProvider() : base()
