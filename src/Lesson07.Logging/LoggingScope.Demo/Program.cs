@@ -12,13 +12,13 @@ namespace LoggingScope.Demo
     {
         static void Main(string[] args)
         {
-            var builder = new ConfigurationBuilder();
+            var builder = new ConfigurationBuilder();                                                                 
             builder.AddCommandLine(args);
             builder.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
             var config = builder.Build();
 
             IServiceCollection serviceClollection = new ServiceCollection();
-            serviceClollection.AddSingleton<IConfiguration>(p => config); // 用工厂模式将配置对象注册到容器管理器
+            serviceClollection.AddSingleton<IConfiguration>(p => config); //  
 
             serviceClollection.AddLogging(builder =>
             {

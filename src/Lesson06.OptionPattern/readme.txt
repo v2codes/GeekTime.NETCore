@@ -40,7 +40,7 @@
 为选项数据添加验证 -- 避免错误配置的应用接收用户流量
     三种验证方法
         直接注册验证函数
-        实现IValidateOptions<TOptions>
+        实现 IValidateOptions<TOptions>
         使用 Microsoft.Extensions.Options.DataAnnotations
     
     通过添加选项验证，可以在配置错误的情况下组织应用程序启动，这样做就可以避免用户流量达到错误的节点（服务）上。
