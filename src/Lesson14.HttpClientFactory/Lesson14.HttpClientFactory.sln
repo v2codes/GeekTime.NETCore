@@ -5,6 +5,13 @@ VisualStudioVersion = 16.0.31229.75
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpClientFactory.Demo", "HttpClientFactory.Demo\HttpClientFactory.Demo.csproj", "{825493C0-E049-4C43-9E18-0ED67F9C95F2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "__readme", "__readme", "{681150FC-82BA-4A31-B7ED-9D5FB1B0230C}"
+	ProjectSection(SolutionItems) = preProject
+		01 管理向外请求的最佳实践.md = 01 管理向外请求的最佳实践.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemoteService.Demo", "RemoteService.Demo\RemoteService.Demo.csproj", "{15E961FE-9266-48AA-A32D-2479A4D6AC79}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +22,10 @@ Global
 		{825493C0-E049-4C43-9E18-0ED67F9C95F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{825493C0-E049-4C43-9E18-0ED67F9C95F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{825493C0-E049-4C43-9E18-0ED67F9C95F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15E961FE-9266-48AA-A32D-2479A4D6AC79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15E961FE-9266-48AA-A32D-2479A4D6AC79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15E961FE-9266-48AA-A32D-2479A4D6AC79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15E961FE-9266-48AA-A32D-2479A4D6AC79}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

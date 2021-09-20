@@ -4,8 +4,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:61183",
-      "sslPort": 44392
+      "applicationUrl": "http://localhost:14901",
+      "sslPort": 44321
     }
   },
   "profiles": {
@@ -17,12 +17,12 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "HttpClientFactory.Demo": {
+    "RemoteService.Demo": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,
-      "launchUrl": "order",
-      "applicationUrl": "http://localhost:5000;https://localhost:5001",
+      "launchUrl": "swagger",
+      "applicationUrl": "http://localhost:5003;https://localhost:5004",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
